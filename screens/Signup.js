@@ -63,7 +63,7 @@ const Signup = ({navigation}) => {
                                 label="Full Name"
                                 icon="person"
                                 placeholder="Nina Kim"
-                                placeholderTextColor={pink}
+                                placeholderTextColor={orange}
                                 onChangeText={handleChange('fullName')}
                                 onBlur={handleBlur('fullName')}
                                 value={values.fullName}
@@ -71,8 +71,8 @@ const Signup = ({navigation}) => {
                             <MyTextInput
                                 label="Email Address"
                                 icon="mail"
-                                placeholder="nina@nina.com"
-                                placeholderTextColor={pink}
+                                placeholder="ex. nina@nina.com"
+                                placeholderTextColor={orange}
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
@@ -82,7 +82,7 @@ const Signup = ({navigation}) => {
                                 label="Password"
                                 icon="lock"
                                 placeholder="* * * * * * * * *"
-                                placeholderTextColor={pink}
+                                placeholderTextColor={orange}
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
@@ -95,7 +95,7 @@ const Signup = ({navigation}) => {
                                 label="Confirm Password"
                                 icon="lock"
                                 placeholder="* * * * * * * * *"
-                                placeholderTextColor={pink}
+                                placeholderTextColor={orange}
                                 onChangeText={handleChange('confirmPassword')}
                                 onBlur={handleBlur('confirmPassword')}
                                 value={values.confirmPassword}
@@ -110,7 +110,7 @@ const Signup = ({navigation}) => {
                             </StyledButton>
                             <Line/>
                             <ExtraView>
-                                <ExtraText>Already have an account?</ExtraText>
+                                <ExtraText>Already have an account? </ExtraText>
                                 <TextLink onPress={() => navigation.navigate("Login")}>
                                     <TextLinkContent>Login</TextLinkContent>
                                 </TextLink>

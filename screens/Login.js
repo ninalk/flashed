@@ -29,13 +29,12 @@ import {
     TextLink,
     TextLinkContent
 } from './../components/styles';
-import { Button } from 'react-native-web';
 
 // import keyboard avoiding wrapper
 import KeyboardAvoidingWrapper from './../components/KeyboardAvoidingWrapper';
 
 // colors
-const { secondary, pink, orange, primary, green } = Colors;
+const { orange, primary } = Colors;
 
 const Login = ({navigation}) => {
 
@@ -59,8 +58,8 @@ const Login = ({navigation}) => {
                             <MyTextInput
                                 label="Email Address"
                                 icon="mail"
-                                placeholder="nina@nina.com"
-                                placeholderTextColor={pink}
+                                placeholder="ex. nina@nina.com"
+                                placeholderTextColor={orange}
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
@@ -71,7 +70,7 @@ const Login = ({navigation}) => {
                                 label="Password"
                                 icon="lock"
                                 placeholder="* * * * * * * * *"
-                                placeholderTextColor={pink}
+                                placeholderTextColor={orange}
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
@@ -90,7 +89,7 @@ const Login = ({navigation}) => {
                                 <ButtonText google={true}>Sign in with Google</ButtonText>
                             </StyledButton>
                             <ExtraView>
-                                <ExtraText>Don't have an account already?</ExtraText>
+                                <ExtraText>New to us? </ExtraText>
                                 <TextLink onPress={() => navigation.navigate("Signup")}>
                                     <TextLinkContent>Signup</TextLinkContent>
                                 </TextLink>
@@ -108,7 +107,7 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ..
     return (
         <View>
             <LeftIcon>
-                <Octicons name={icon} size={30} color={orange} />
+                <Octicons name={icon} size={28} color={orange} />
             </LeftIcon>
             <StyledInputLabel>{label}</StyledInputLabel>
             <StyledTextInput {...props}/>
@@ -116,7 +115,7 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ..
                 <RightIcon onPress={() => setHidePassword(!hidePassword)}>
                     <Ionicons 
                         name={hidePassword ? 'md-eye-off' : 'md-eye'}
-                        size={30} 
+                        size={28} 
                         color={orange} 
 
                     />

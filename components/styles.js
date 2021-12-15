@@ -5,8 +5,9 @@ const StatusBarHeight = Constants.statusBarHeight;
 
 // colors
 export const Colors = {
-    primary: "#ffffff",
-    secondary: "rgb(252, 247, 241)",
+    primary: "rgb(252, 247, 241)",
+    secondary: "rgb(255, 255, 255)",
+    tertiary: "rgb(172, 199, 28)",
     pink: "rgb(232, 146, 144)",
     green: "rgb(94, 145, 75)",
     yellow: "rgb(244, 210, 93)",
@@ -14,15 +15,16 @@ export const Colors = {
     orange: "rgb(232, 126, 60)"
 }
 
-const { primary, secondary, pink, green, yellow, blue, orange } = Colors;
+const { primary, secondary, tertiary, pink, green, yellow, blue, orange } = Colors;
 
 
 export const StyledContainer = styled.View`
     flex: 1;
     padding: 25px;
-    padding-top: ${StatusBarHeight + 30}px;
+    padding-top: ${StatusBarHeight + 100}px;
     background-color: ${primary};
 `;
+
 export const InnerContainer = styled.View`
     flex: 1;
     width: 100%;
@@ -33,19 +35,21 @@ export const HomeContainer = styled(InnerContainer)`
     padding: 25px;
     padding-top: 10px;
     justify-content: center;
+    background-color: ${primary};
 `;
 
-export const PageTitle = styled.Text`
-    font-size: 30px;
-    text-align: center;
-    font-weight: bold;
-    color: ${pink};
-    padding: 10px;
+// export const PageTitle = styled.Text`
+//     font-size: 30px;
+//     text-align: center;
+//     font-weight: bold;
+//     color: ${pink};
+//     padding: 10px;
 
-    ${(props) => props.home && `
-        font-size: 35px;
-    `}
-`;
+//     ${(props) => props.home && `
+//         font-size: 35px;
+//     `}
+// `;
+
 export const SubTitle = styled.Text`
     font-size: 20px;
     text-align: center;
@@ -84,7 +88,7 @@ export const StyledInputLabel = styled.Text`
 
 export const StyledButton = styled.TouchableOpacity`
     padding: 15px;
-    background-color: ${orange};
+    background-color: ${tertiary};
     justify-content: center;
     align-items: center;
     border-radius: 5px;
@@ -103,19 +107,19 @@ export const ButtonText = styled.Text`
     font-size: 16px;
 
     ${(props) => props.google == true && `
-        padding: 20px;
+        padding-left: 20px;
     `}
 `;
 
 export const LeftIcon = styled.View`
     left: 15px;
-    top: 38px;
+    top: 35px;
     position: absolute;
     z-index: 1;
 `;
 export const RightIcon = styled.TouchableOpacity`
     right: 15px;
-    top: 38px;
+    top: 35px;
     position: absolute;
     z-index: 1;
 `;
@@ -142,7 +146,6 @@ export const ExtraView = styled.View`
 export const ExtraText = styled.Text`
     justify-content: center;
     align-items: center;
-    color: ${pink};
     font-size: 15px;
 `;
 

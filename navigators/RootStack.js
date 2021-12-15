@@ -11,7 +11,7 @@ import Signup from './../screens/Signup';
 import Home from './../screens/Home';
 
 const Stack = createNativeStackNavigator();
-const { pink, green, blue, primary } = Colors;
+const { pink, primary } = Colors;
 
 
 const RootStack = () => {
@@ -31,9 +31,9 @@ const RootStack = () => {
                     }
                 }}
             >
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen options={{headerTintColor: primary}} name="Signup" component={Signup} />
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen options={{headerTintColor: primary}} name="Signup" component={Signup} />
             </Stack.Navigator>
         </NavigationContainer>
     )

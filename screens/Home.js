@@ -7,7 +7,6 @@ import FlashedLogo from './../components/FlashedLogo';
 import {
     HomeContainer,
     InnerContainer,
-    PageTitle,
     SubTitle,
     StyledFormArea,
     StyledButton,
