@@ -3,6 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import { Formik } from 'formik';
 
+// logo
+import FlashedLogo from './../components/FlashedLogo';
+
 // icons
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
 
@@ -43,7 +46,7 @@ const Login = ({navigation}) => {
             <StyledContainer>
                 <StatusBar style="dark" />
                 <InnerContainer>
-                    <PageTitle>FLASHED</PageTitle>
+                    <FlashedLogo />
                     <SubTitle>Account Login</SubTitle>
                     <Formik
                         initialValues={{email: '', password: ''}}
