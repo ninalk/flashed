@@ -38,7 +38,7 @@ import KeyboardAvoidingWrapper from './../components/KeyboardAvoidingWrapper';
 // import DateTimePicker from '@react-native-community/datetimepicker';
 
 // Colors
-const { secondary, pink, orange, primary, green } = Colors;
+const { secondary, pink, orange, primary, green, grey } = Colors;
 
 const Signup = ({navigation}) => {
 
@@ -60,10 +60,10 @@ const Signup = ({navigation}) => {
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (<StyledFormArea>
                             <MyTextInput
-                                label="Full Name"
+                                label="Username"
                                 icon="person"
-                                placeholder="Nina Kim"
-                                placeholderTextColor={orange}
+                                placeholder="ex. ninanina"
+                                placeholderTextColor={grey}
                                 onChangeText={handleChange('fullName')}
                                 onBlur={handleBlur('fullName')}
                                 value={values.fullName}
@@ -72,7 +72,7 @@ const Signup = ({navigation}) => {
                                 label="Email Address"
                                 icon="mail"
                                 placeholder="ex. nina@nina.com"
-                                placeholderTextColor={orange}
+                                placeholderTextColor={grey}
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
@@ -82,7 +82,7 @@ const Signup = ({navigation}) => {
                                 label="Password"
                                 icon="lock"
                                 placeholder="* * * * * * * * *"
-                                placeholderTextColor={orange}
+                                placeholderTextColor={grey}
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
@@ -95,7 +95,7 @@ const Signup = ({navigation}) => {
                                 label="Confirm Password"
                                 icon="lock"
                                 placeholder="* * * * * * * * *"
-                                placeholderTextColor={orange}
+                                placeholderTextColor={grey}
                                 onChangeText={handleChange('confirmPassword')}
                                 onBlur={handleBlur('confirmPassword')}
                                 value={values.confirmPassword}
@@ -128,7 +128,7 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ..
     return (
         <View>
             <LeftIcon>
-                <Octicons name={icon} size={30} color={orange} />
+                <Octicons name={icon} size={30} color={grey} />
             </LeftIcon>
             <StyledInputLabel>{label}</StyledInputLabel>
             <StyledTextInput {...props}/>
@@ -137,7 +137,7 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ..
                     <Ionicons 
                         name={hidePassword ? 'md-eye-off' : 'md-eye'}
                         size={30} 
-                        color={orange} 
+                        color={grey} 
 
                     />
                 </RightIcon>

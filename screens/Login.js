@@ -34,7 +34,7 @@ import {
 import KeyboardAvoidingWrapper from './../components/KeyboardAvoidingWrapper';
 
 // colors
-const { orange, primary } = Colors;
+const { grey, primary } = Colors;
 
 const Login = ({navigation}) => {
 
@@ -59,7 +59,7 @@ const Login = ({navigation}) => {
                                 label="Email Address"
                                 icon="mail"
                                 placeholder="ex. nina@nina.com"
-                                placeholderTextColor={orange}
+                                placeholderTextColor={grey}
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
@@ -70,7 +70,7 @@ const Login = ({navigation}) => {
                                 label="Password"
                                 icon="lock"
                                 placeholder="* * * * * * * * *"
-                                placeholderTextColor={orange}
+                                placeholderTextColor={grey}
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
@@ -107,7 +107,7 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ..
     return (
         <View>
             <LeftIcon>
-                <Octicons name={icon} size={28} color={orange} />
+                <Octicons name={icon} size={28} color={grey} />
             </LeftIcon>
             <StyledInputLabel>{label}</StyledInputLabel>
             <StyledTextInput {...props}/>
@@ -116,7 +116,7 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ..
                     <Ionicons 
                         name={hidePassword ? 'md-eye-off' : 'md-eye'}
                         size={28} 
-                        color={orange} 
+                        color={grey} 
 
                     />
                 </RightIcon>

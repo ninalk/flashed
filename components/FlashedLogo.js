@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     setFontSize: {
-        fontSize: 35,
+        fontSize: 45,
         fontWeight: 'bold'
     },
     setColorPink: {

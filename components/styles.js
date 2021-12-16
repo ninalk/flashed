@@ -8,6 +8,7 @@ export const Colors = {
     primary: "rgb(252, 247, 241)",
     secondary: "rgb(255, 255, 255)",
     tertiary: "rgb(172, 199, 28)",
+    grey: "rgb(206, 206, 206)",
     pink: "rgb(232, 146, 144)",
     green: "rgb(94, 145, 75)",
     yellow: "rgb(244, 210, 93)",
@@ -15,14 +16,14 @@ export const Colors = {
     orange: "rgb(232, 126, 60)"
 }
 
-const { primary, secondary, tertiary, pink, green, yellow, blue, orange } = Colors;
-
+const { primary, secondary, tertiary, grey, pink, green, yellow, blue, orange } = Colors;
 
 export const StyledContainer = styled.View`
     flex: 1;
     padding: 25px;
     padding-top: ${StatusBarHeight + 100}px;
     background-color: ${primary};
+    padding-bottom: 250px;
 `;
 
 export const InnerContainer = styled.View`
@@ -77,11 +78,10 @@ export const StyledTextInput = styled.TextInput`
     height: 60px; 
     margin-vertical: 3px;
     margin-bottom: 10px;
-    color: ${green};
 `;
 
 export const StyledInputLabel = styled.Text`
-    color: ${orange};
+    color: ${grey};
     font-size: 13px;
     text-align: left;
 `;
@@ -132,7 +132,7 @@ export const MsgBox = styled.Text`
 export const Line = styled.View`
     height: 1px;
     width: 100%;
-    background-color: ${secondary};
+    background-color: ${grey};
     margin-vertical: 10px;
 `;
 
