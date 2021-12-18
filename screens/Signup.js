@@ -13,7 +13,6 @@ import { Octicons, Ionicons } from '@expo/vector-icons';
 import {
     StyledContainer,
     InnerContainer,
-    PageTitle,
     SubTitle,
     StyledFormArea,
     StyledButton,
@@ -34,11 +33,8 @@ import {
 // import keyboard avoiding wrapper
 import KeyboardAvoidingWrapper from './../components/KeyboardAvoidingWrapper';
 
-// Date picker
-// import DateTimePicker from '@react-native-community/datetimepicker';
-
 // Colors
-const { secondary, pink, orange, primary, green, grey } = Colors;
+const { grey } = Colors;
 
 const Signup = ({navigation}) => {
 
@@ -52,7 +48,7 @@ const Signup = ({navigation}) => {
                     <FlashedLogo />
                     <SubTitle>Account Signup</SubTitle>
                     <Formik
-                        initialValues={{fullName: '', email: '', password: '', confirmPassword: ''}}
+                        initialValues={{username: '', email: '', password: '', confirmPassword: ''}}
                         onSubmit={(values) => {
                             console.log(values);
                             navigation.navigate("Home");
@@ -64,9 +60,9 @@ const Signup = ({navigation}) => {
                                 icon="person"
                                 placeholder="ex. ninanina"
                                 placeholderTextColor={grey}
-                                onChangeText={handleChange('fullName')}
-                                onBlur={handleBlur('fullName')}
-                                value={values.fullName}
+                                onChangeText={handleChange('username')}
+                                onBlur={handleBlur('username')}
+                                value={values.username}
                             />
                             <MyTextInput
                                 label="Email Address"
@@ -81,7 +77,7 @@ const Signup = ({navigation}) => {
                             <MyTextInput
                                 label="Password"
                                 icon="lock"
-                                placeholder="* * * * * * * * *"
+                                placeholder="* * * * * * * *"
                                 placeholderTextColor={grey}
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
@@ -94,7 +90,7 @@ const Signup = ({navigation}) => {
                             <MyTextInput
                                 label="Confirm Password"
                                 icon="lock"
-                                placeholder="* * * * * * * * *"
+                                placeholder="* * * * * * * *"
                                 placeholderTextColor={grey}
                                 onChangeText={handleChange('confirmPassword')}
                                 onBlur={handleBlur('confirmPassword')}
