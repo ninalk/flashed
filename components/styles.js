@@ -159,3 +159,14 @@ export const TextLinkContent = styled.Text`
     color: ${blue};
     font-size: 15px;
 `
+
+export const Avatar = styled.Image`
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border-radius: 50px;
+    border-width: 2px;
+    border-color: ${secondary};
+    margin-top: 10px;
+    margin-bottom: 10px;
+`

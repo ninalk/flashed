@@ -36,6 +36,9 @@ import KeyboardAvoidingWrapper from './../components/KeyboardAvoidingWrapper';
 // API client
 import axios from 'axios';
 
+// Google signin
+import * as Google from 'expo-google-app-auth';
+
 // colors
 const { grey, primary, tertiary } = Colors;
 
@@ -44,6 +47,7 @@ const Login = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
     const [message, setMessage] = useState();
     const [messageType, setMessageType] = useState();
+    const [googleSubmitting, setGoogleSubmitting] = useState(false);
 
     const handleLogin = (creds, setSubmitting) => {
         handleMessage(null);
@@ -71,6 +75,35 @@ const Login = ({navigation}) => {
     const handleMessage = (message, type = 'FAILED') => {
         setMessage(message);
         setMessageType(type);
+    }
+
+    const handleGoogleSignin = () => {
+        setGoogleSubmitting(true);
+        const config = {
+            iosClientId: `701889211521-o7ne1gqsj75mgb763t7414846vc606ks.apps.googleusercontent.com`,
+            androidClientId: `701889211521-9gprelgt9hkb5ig4ndjtrtg0idh5iedh.apps.googleusercontent.com`,
+            scopes: ['profile', 'email']
+        }
+
+        Google
+            .logInAsync(config)
+            .then((result) => {
+                const {type, user} = result;
+                
+                if (type == 'success') {
+                    const {email, name, photoUrl} = user;
+                    handleMessage('Google signin successful', 'SUCCESS');
+                    setTimeout(() => navigation.navigate('Home', {email, name, photoUrl}), 1000);
+                } else {
+                    handleMessage('Google signin was cancelled')
+                }
+                setGoogleSubmitting(false);
+            })
+            .catch(err => {
+                console.log(err);
+                handleMessage('An error occurred. Check your network and try again.')
+                setGoogleSubmitting(false);
+            })
     }
 
     return (
@@ -127,10 +160,17 @@ const Login = ({navigation}) => {
                                 </StyledButton>)}
 
                             <Line/>
-                            <StyledButton google={true} onPress={handleSubmit}>
-                                <Fontisto name="google" color={primary} size={25} />
-                                <ButtonText google={true}>Sign in with Google</ButtonText>
-                            </StyledButton>
+                            {!googleSubmitting && (
+                                <StyledButton google={true} onPress={handleGoogleSignin}>
+                                    <Fontisto name="google" color={primary} size={25} />
+                                    <ButtonText google={true}>Sign in with Google</ButtonText>
+                                </StyledButton>
+                            )}
+                            {googleSubmitting && (
+                                <StyledButton google={true} disabled={true}>
+                                    <ActivityIndicator size="large" color={primary} />
+                                </StyledButton>
+                            )}
                             <ExtraView>
                                 <ExtraText>New to us? </ExtraText>
                                 <TextLink onPress={() => navigation.navigate("Signup")}>

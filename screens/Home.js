@@ -11,11 +11,14 @@ import {
     StyledFormArea,
     StyledButton,
     ButtonText,
-    Line
+    Line,
+    Avatar
 } from './../components/styles';
 
 const Home = ({navigation, route}) => {
-    const {username} = route.params;
+    const {username, photoUrl} = route.params;
+    const AvatarImg = photoUrl ? {uri: photoUrl} : '';
+
     return (
         <>
             <StatusBar style="dark" />
@@ -24,6 +27,8 @@ const Home = ({navigation, route}) => {
                     <FlashedLogo />
                     <SubTitle welcome={true}>Welcome, {username || 'friend'}!</SubTitle>
                     <StyledFormArea>
+                        
+                        <Avatar resizeMode="cover" source={AvatarImg} />
                         <Line/>
                         <StyledButton onPress={() => {navigation.navigate("Login");}}>
                             <ButtonText>Logout</ButtonText>
