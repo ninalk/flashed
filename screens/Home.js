@@ -14,15 +14,15 @@ import {
     Line
 } from './../components/styles';
 
-const Home = ({navigation}) => {
-
+const Home = ({navigation, route}) => {
+    const {username} = route.params;
     return (
         <>
             <StatusBar style="dark" />
             <InnerContainer>
                 <HomeContainer>
                     <FlashedLogo />
-                    <SubTitle>Welcome!</SubTitle>
+                    <SubTitle welcome={true}>Welcome, {username || 'friend'}!</SubTitle>
                     <StyledFormArea>
                         <Line/>
                         <StyledButton onPress={() => {navigation.navigate("Login");}}>

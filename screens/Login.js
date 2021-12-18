@@ -48,12 +48,12 @@ const Login = ({navigation}) => {
     const handleLogin = (creds, setSubmitting) => {
         handleMessage(null);
         const url = 'http://192.168.1.2:3000/users/login';
-        console.log(creds, url)
+
         axios.post(url, creds)
         .then((res) => {
             const result = res.data;
             const {message, status, data} = result;
-            console.log(url)
+
             if (status !== 'SUCCESS') {
                 handleMessage(message, status);
             } else {
@@ -123,7 +123,7 @@ const Login = ({navigation}) => {
                             )}
                             {isSubmitting && (
                                 <StyledButton disabled={true}>
-                                    <ActivityIndicator size="large" color={tertiary} />
+                                    <ActivityIndicator size="large" color={primary} />
                                 </StyledButton>)}
 
                             <Line/>

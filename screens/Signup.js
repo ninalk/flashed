@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { Formik } from 'formik';
 
 // logo
@@ -33,12 +33,44 @@ import {
 // import keyboard avoiding wrapper
 import KeyboardAvoidingWrapper from './../components/KeyboardAvoidingWrapper';
 
+// API client
+import axios from 'axios';
+
 // Colors
-const { grey } = Colors;
+const { grey, primary } = Colors;
 
 const Signup = ({navigation}) => {
 
     const [hidePassword, setHidePassword] = useState(true);
+    const [message, setMessage] = useState();
+    const [messageType, setMessageType] = useState();
+
+    const handleSignup = (creds, setSubmitting) => {
+        handleMessage(null);
+        const url = 'http://192.168.1.2:3000/users/signup';
+        
+        axios.post(url, creds)
+        .then((res) => {
+            const result = res.data;
+            const {message, status, data} = result;
+            if (status !== 'SUCCESS') {
+                handleMessage(message, status);
+            } else {
+                navigation.navigate('Home', {...data})
+            }
+            setSubmitting(false);
+        })
+        .catch((err) => {
+            console.log(err, ' this error')
+            setSubmitting(false);
+            handleMessage("An error occured. Check your network and try again");
+        })
+    }
+
+    const handleMessage = (message, type = 'FAILED') => {
+        setMessage(message);
+        setMessageType(type);
+    }
 
     return (
         <KeyboardAvoidingWrapper>
@@ -49,12 +81,20 @@ const Signup = ({navigation}) => {
                     <SubTitle>Account Signup</SubTitle>
                     <Formik
                         initialValues={{username: '', email: '', password: '', confirmPassword: ''}}
-                        onSubmit={(values) => {
+                        onSubmit={(values, {setSubmitting}) => {
                             console.log(values);
-                            navigation.navigate("Home");
+                            if (values.username == '' || 
+                                values.email == '' || 
+                                values.password == '' || 
+                                values.confirmPassword == '') {
+                                handleMessage("Please fill all fields!")
+                                setSubmitting(false);
+                            } else {
+                                handleSignup(values, setSubmitting);
+                            }
                         }}
                     >
-                        {({ handleChange, handleBlur, handleSubmit, values }) => (<StyledFormArea>
+                        {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (<StyledFormArea>
                             <MyTextInput
                                 label="Username"
                                 icon="person"
@@ -100,10 +140,17 @@ const Signup = ({navigation}) => {
                                 hidePassword={hidePassword}
                                 setHidePassword={setHidePassword}
                             />
-                            <MsgBox>...</MsgBox>
-                            <StyledButton onPress={handleSubmit}>
-                                <ButtonText>Signup</ButtonText>
-                            </StyledButton>
+                            <MsgBox type={messageType}>{message}</MsgBox>
+                            {!isSubmitting && (
+                                <StyledButton onPress={handleSubmit}>
+                                    <ButtonText>Signup</ButtonText>
+                                </StyledButton>
+                            )}
+                            {isSubmitting && (
+                                <StyledButton>
+                                    <ActivityIndicator size="large" color={primary} />
+                                </StyledButton>
+                            )}
                             <Line/>
                             <ExtraView>
                                 <ExtraText>Already have an account? </ExtraText>
