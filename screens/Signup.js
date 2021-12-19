@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator } from 'react-native';
 import { Formik } from 'formik';
@@ -36,6 +36,12 @@ import KeyboardAvoidingWrapper from './../components/KeyboardAvoidingWrapper';
 // API client
 import axios from 'axios';
 
+// credentials context
+import { CredentialsContext } from './../components/CredentialsContext';
+
+// async storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // Colors
 const { grey, primary } = Colors;
 
@@ -44,11 +50,14 @@ const Signup = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
     const [message, setMessage] = useState();
     const [messageType, setMessageType] = useState();
+    
+    // context
+    const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
 
     const handleSignup = (creds, setSubmitting) => {
         handleMessage(null);
         const url = 'http://192.168.1.2:3000/users/signup';
-        
+
         axios.post(url, creds)
         .then((res) => {
             const result = res.data;
@@ -56,7 +65,7 @@ const Signup = ({navigation}) => {
             if (status !== 'SUCCESS') {
                 handleMessage(message, status);
             } else {
-                navigation.navigate('Home', {...data})
+                persistLogin({...data}, message, status);
             }
             setSubmitting(false);
         })
@@ -70,6 +79,18 @@ const Signup = ({navigation}) => {
     const handleMessage = (message, type = 'FAILED') => {
         setMessage(message);
         setMessageType(type);
+    }
+
+    const persistLogin = (creds, message, status) => {
+        AsyncStorage.setItem('flashedCredentials', JSON.stringify(creds))
+        .then(() => {
+            handleMessage(message, status);
+            setStoredCredentials(creds);
+        })
+        .catch(err => {
+            console.log(err);
+            handleMessage('Persisting login failed');
+        })
     }
 
     return (

@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator } from 'react-native';
 import { Formik } from 'formik';
+
+// async storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // logo
 import FlashedLogo from './../components/FlashedLogo';
@@ -39,6 +42,9 @@ import axios from 'axios';
 // Google signin
 import * as Google from 'expo-google-app-auth';
 
+// credentials context
+import { CredentialsContext } from './../components/CredentialsContext';
+
 // colors
 const { grey, primary, tertiary } = Colors;
 
@@ -48,6 +54,9 @@ const Login = ({navigation}) => {
     const [message, setMessage] = useState();
     const [messageType, setMessageType] = useState();
     const [googleSubmitting, setGoogleSubmitting] = useState(false);
+
+    // context
+    const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
 
     const handleLogin = (creds, setSubmitting) => {
         handleMessage(null);
@@ -61,7 +70,7 @@ const Login = ({navigation}) => {
             if (status !== 'SUCCESS') {
                 handleMessage(message, status);
             } else {
-                navigation.navigate('Home', {...data[0]})
+                persistLogin({...data[0]}, message, status);
             }
             setSubmitting(false);
         })
@@ -77,8 +86,10 @@ const Login = ({navigation}) => {
         setMessageType(type);
     }
 
+    // Google Signin
     const handleGoogleSignin = () => {
         setGoogleSubmitting(true);
+        // OAuth 2.0 client IDs and scope
         const config = {
             iosClientId: `701889211521-o7ne1gqsj75mgb763t7414846vc606ks.apps.googleusercontent.com`,
             androidClientId: `701889211521-9gprelgt9hkb5ig4ndjtrtg0idh5iedh.apps.googleusercontent.com`,
@@ -91,9 +102,8 @@ const Login = ({navigation}) => {
                 const {type, user} = result;
                 
                 if (type == 'success') {
-                    const {email, name, photoUrl} = user;
-                    handleMessage('Google signin successful', 'SUCCESS');
-                    setTimeout(() => navigation.navigate('Home', {email, name, photoUrl}), 1000);
+                    const {email, name} = user;
+                    persistLogin({ email, name }, message);
                 } else {
                     handleMessage('Google signin was cancelled')
                 }
@@ -106,6 +116,18 @@ const Login = ({navigation}) => {
             })
     }
 
+    const persistLogin = (creds, message, status) => {
+        AsyncStorage.setItem('flashedCredentials', JSON.stringify(creds))
+        .then(() => {
+            handleMessage(message, status);
+            setStoredCredentials(creds);
+        })
+        .catch(err => {
+            console.log(err);
+            handleMessage('Persisting login failed');
+        })
+    }
+
     return (
         <KeyboardAvoidingWrapper>
             <StyledContainer>
@@ -115,16 +137,18 @@ const Login = ({navigation}) => {
                     <SubTitle>Account Login</SubTitle>
                     <Formik
                         initialValues={{username: '', password: ''}}
-                        onSubmit={(values, {setSubmitting}) => {
+                        onSubmit={(values, {setSubmitting, resetForm}) => {
                             if (values.username == '' || values.password == '') {
                                 handleMessage('Please fill all fields');
                                 setSubmitting(false);
                             } else {
                                 handleLogin(values, setSubmitting);
+                                resetForm();
                             }
                         }}
                     >
-                        {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (<StyledFormArea>
+                        {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => 
+                        (<StyledFormArea>
                             <MyTextInput
                                 label="username"
                                 icon="person"
@@ -150,12 +174,12 @@ const Login = ({navigation}) => {
                             />
                             <MsgBox type={messageType}>{message}</MsgBox>
                             {!isSubmitting && (
-                                <StyledButton onPress={handleSubmit}>
+                                <StyledButton onPress={handleSubmit} >
                                     <ButtonText>Login</ButtonText>
                                 </StyledButton>
                             )}
                             {isSubmitting && (
-                                <StyledButton disabled={true}>
+                                <StyledButton disabled={true} >
                                     <ActivityIndicator size="large" color={primary} />
                                 </StyledButton>)}
 

@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
+// credentials context
+import { CredentialsContext } from './../components/CredentialsContext';
+
+// async storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // logo
 import FlashedLogo from './../components/FlashedLogo';
@@ -12,12 +17,22 @@ import {
     StyledButton,
     ButtonText,
     Line,
-    Avatar
+    // Avatar
 } from './../components/styles';
 
-const Home = ({navigation, route}) => {
-    const {username, photoUrl} = route.params;
-    const AvatarImg = photoUrl ? {uri: photoUrl} : '';
+const Home = () => {
+    
+    // context
+    const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
+    const { username } = storedCredentials;
+
+    const clearLogin = () => {
+        AsyncStorage.removeItem('flashedCredentials')
+        .then(() => {
+            setStoredCredentials("");
+        })
+        .catch(err => console.log(err))
+    }
 
     return (
         <>
@@ -25,12 +40,11 @@ const Home = ({navigation, route}) => {
             <InnerContainer>
                 <HomeContainer>
                     <FlashedLogo />
-                    <SubTitle welcome={true}>Welcome, {username || 'friend'}!</SubTitle>
+                    <SubTitle home={true}>Welcome, {username || 'friend'}!</SubTitle>
                     <StyledFormArea>
-                        
-                        <Avatar resizeMode="cover" source={AvatarImg} />
+                        {/* <Avatar resizeMode="cover" source={AvatarImg} /> */}
                         <Line/>
-                        <StyledButton onPress={() => {navigation.navigate("Login");}}>
+                        <StyledButton onPress={clearLogin}>
                             <ButtonText>Logout</ButtonText>
                         </StyledButton>
                         

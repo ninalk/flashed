@@ -13,29 +13,41 @@ import Home from './../screens/Home';
 const Stack = createNativeStackNavigator();
 const { pink, primary } = Colors;
 
+// credentials context
+import { CredentialsContext } from './../components/CredentialsContext';
 
 const RootStack = () => {
     return (
-        <NavigationContainer>
-            <Stack.Navigator 
-                initialRouteName="Login"
-                screenOptions={{
-                    headerStyle: {
-                        backgroundColor: 'transparent'
-                    },
-                    headerTintColor: pink,
-                    headerTransparent: true,
-                    headerTitle: '',
-                    headerLeftContainerStyle: {
-                        paddingLeft: 20
-                    }
-                }}
-            >
-                <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen options={{headerTintColor: primary}} name="Signup" component={Signup} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <CredentialsContext.Consumer>
+            {({storedCredentials}) => (
+                <NavigationContainer>
+                    <Stack.Navigator 
+                        initialRouteName="Login"
+                        screenOptions={{
+                            headerStyle: {
+                                backgroundColor: 'transparent'
+                            },
+                            headerTintColor: pink,
+                            headerTransparent: true,
+                            headerTitle: '',
+                            headerLeftContainerStyle: {
+                                paddingLeft: 20
+                            }
+                        }}
+                    >
+                    {storedCredentials ? (
+                        <Stack.Screen options={{headerTintColor: primary}} name="Home" component={Home} />
+                    ) : (
+                        <>
+                            <Stack.Screen name="Login" component={Login} />
+                            <Stack.Screen name="Signup" component={Signup} />
+                        </>
+                    )}
+                    </Stack.Navigator>
+                </NavigationContainer>
+            )}
+        </CredentialsContext.Consumer>
+        
     )
 }
 
