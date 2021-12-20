@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Platform } from 'react-native';
 import { Formik } from 'formik';
 
 // async storage
@@ -41,6 +41,9 @@ import axios from 'axios';
 
 // Google signin
 import * as Google from 'expo-google-app-auth';
+
+// Gets google sigin to work in expo app after apk build
+import * as GoogleSignIn from 'expo-google-sign-in';
 
 // credentials context
 import { CredentialsContext } from './../components/CredentialsContext';
@@ -86,35 +89,35 @@ const Login = ({navigation}) => {
         setMessageType(type);
     }
 
-    // Google Signin
-    const handleGoogleSignin = () => {
-        setGoogleSubmitting(true);
-        // OAuth 2.0 client IDs and scope
-        const config = {
-            iosClientId: `701889211521-o7ne1gqsj75mgb763t7414846vc606ks.apps.googleusercontent.com`,
-            androidClientId: `701889211521-9gprelgt9hkb5ig4ndjtrtg0idh5iedh.apps.googleusercontent.com`,
-            scopes: ['profile', 'email']
-        }
+    // Google Signin dev version
+    // const handleGoogleSignin = () => {
+    //     setGoogleSubmitting(true);
+    //     // OAuth 2.0 client IDs and scope
+    //     const config = {
+    //         iosClientId: `701889211521-o7ne1gqsj75mgb763t7414846vc606ks.apps.googleusercontent.com`,
+    //         androidClientId: `701889211521-9gprelgt9hkb5ig4ndjtrtg0idh5iedh.apps.googleusercontent.com`,
+    //         scopes: ['profile', 'email']
+    //     }
 
-        Google
-            .logInAsync(config)
-            .then((result) => {
-                const {type, user} = result;
+    //     Google
+    //         .logInAsync(config)
+    //         .then((result) => {
+    //             const {type, user} = result;
                 
-                if (type == 'success') {
-                    const {email, name} = user;
-                    persistLogin({ email, name }, message);
-                } else {
-                    handleMessage('Google signin was cancelled')
-                }
-                setGoogleSubmitting(false);
-            })
-            .catch(err => {
-                console.log(err);
-                handleMessage('An error occurred. Check your network and try again.')
-                setGoogleSubmitting(false);
-            })
-    }
+    //             if (type == 'success') {
+    //                 const {email, name} = user;
+    //                 persistLogin({ email, name }, message);
+    //             } else {
+    //                 handleMessage('Google signin was cancelled')
+    //             }
+    //             setGoogleSubmitting(false);
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //             handleMessage('An error occurred. Check your network and try again.')
+    //             setGoogleSubmitting(false);
+    //         })
+    // }
 
     const persistLogin = (creds, message, status) => {
         AsyncStorage.setItem('flashedCredentials', JSON.stringify(creds))
@@ -126,6 +129,49 @@ const Login = ({navigation}) => {
             console.log(err);
             handleMessage('Persisting login failed');
         })
+    }
+
+    // initialize google sign in
+    useEffect(() => {
+        initAsync();
+    });
+
+    const androidClientId = "661216398064-io32amvjient3v0l8puqa9idc64sct3o.apps.googleusercontent.com"
+    const iosClientId = "661216398064-rnokg2hsvnbu5956qrb4ehovi6e1h1qe.apps.googleusercontent.com"
+
+    const initAsync = async () => {
+        try {
+            await GoogleSignIn.initAsync({
+                clientId: Platform.OS === 'android' ? androidClientId : iosClientId,
+            });
+            getUserDetails();
+        } catch({message}) {
+            console.log("Google sign in error: " + message);
+        }
+    }
+
+    const getUserDetails = async () => {
+        const user = await GoogleSignIn.signInSilentlyAsync();
+        // set state
+        setGoogleSubmitting(false);
+        user && persistLogin({...user}, "Google signin successful", 'success');
+    }
+
+    const handleGoogleSignin = async () => {
+        try {
+            setGoogleSubmitting(true);
+            await GoogleSignIn.askForPlayServicesAsync(); // android only
+            const {type, user} = await GoogleSignIn.signInAsync();
+            if (type === "success") {
+                getUserDetails();
+            } else {
+                handleMessage('Google signin cancelled')
+                setGoogleSubmitting(false);
+            }
+        } catch {
+            handleMessage('Google signin error: ' + message);
+            setGoogleSubmitting(false);
+        }
     }
 
     return (
