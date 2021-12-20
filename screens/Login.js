@@ -102,8 +102,8 @@ const Login = ({navigation}) => {
                 const {type, user} = result;
                 
                 if (type == 'success') {
-                    const {email, name} = user;
-                    persistLogin({ email, name }, message);
+                    const {email, username} = user;
+                    persistLogin({ email, username }, message);
                 } else {
                     handleMessage('Google signin was cancelled')
                 }
