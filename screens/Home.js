@@ -6,9 +6,6 @@ import { CredentialsContext } from './../components/CredentialsContext';
 // async storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Gets google sigin to work in expo app after apk build
-import * as GoogleSignIn from 'expo-google-sign-in';
-
 // logo
 import FlashedLogo from './../components/FlashedLogo';
 
@@ -27,24 +24,14 @@ const Home = () => {
     
     // context
     const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
-    let { username } = storedCredentials;
+    const { username } = storedCredentials;
 
-    // for google sign in
-    username = username ? username : displayName;
-
-    const clearLogin = async () => {
-        try {
-            if (!__DEV__) {
-                await GoogleSignIn.signOutAsync();
-                await AsyncStorage.removeItem('flashedCredentials');
-            } else {
-                await AsyncStorage.removeItem('flashedCredentials');
-            }
+    const clearLogin = () => {
+        AsyncStorage.removeItem('flashedCredentials')
+        .then(() => {
             setStoredCredentials("");
-        } catch ({message}) {
-            alert("Logout Error: " + message);
-        }
-        
+        })
+        .catch(err => console.log(err))
     }
 
     return (

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import RootStack from './navigators/RootStack';
 
 // app loading
-// tells splash screen to keep the splash screen visible while the Apploading component is mounted
 import AppLoading from 'expo-app-loading';
 
 // async storage
