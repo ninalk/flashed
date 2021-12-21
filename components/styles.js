@@ -39,18 +39,6 @@ export const HomeContainer = styled(InnerContainer)`
     background-color: ${primary};
 `;
 
-// export const PageTitle = styled.Text`
-//     font-size: 30px;
-//     text-align: center;
-//     font-weight: bold;
-//     color: ${pink};
-//     padding: 10px;
-
-//     ${(props) => props.home && `
-//         font-size: 35px;
-//     `}
-// `;
-
 export const SubTitle = styled.Text`
     font-size: 20px;
     text-align: center;

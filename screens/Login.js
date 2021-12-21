@@ -60,6 +60,7 @@ const Login = ({navigation}) => {
 
     const handleLogin = (creds, setSubmitting) => {
         handleMessage(null);
+        // const url = 'https://glacial-hollows-41394.herokuapp.com/users/login';
         const url = 'http://192.168.1.2:3000/users/login';
 
         axios.post(url, creds)

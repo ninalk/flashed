@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
+
 // credentials context
 import { CredentialsContext } from './../components/CredentialsContext';
 
@@ -17,7 +18,6 @@ import {
     StyledButton,
     ButtonText,
     Line,
-    // Avatar
 } from './../components/styles';
 
 const Home = () => {
@@ -42,7 +42,6 @@ const Home = () => {
                     <FlashedLogo />
                     <SubTitle home={true}>Welcome, {username || 'friend'}!</SubTitle>
                     <StyledFormArea>
-                        {/* <Avatar resizeMode="cover" source={AvatarImg} /> */}
                         <Line/>
                         <StyledButton onPress={clearLogin}>
                             <ButtonText>Logout</ButtonText>

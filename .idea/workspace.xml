@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec2fc31e-d196-4a76-9321-4865002268bc" name="Default Changelist" comment="" />
+    <list default="true" id="ec2fc31e-d196-4a76-9321-4865002268bc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/screens/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Signup.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
