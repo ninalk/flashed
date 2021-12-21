@@ -13,10 +13,11 @@ export const Colors = {
     green: "rgb(94, 145, 75)",
     yellow: "rgb(244, 210, 93)",
     blue: "rgb(100, 168, 192)",
-    orange: "rgb(232, 126, 60)"
+    orange: "rgb(232, 126, 60)",
+    black: "#000000"
 }
 
-const { primary, secondary, tertiary, grey, pink, green, yellow, blue, orange } = Colors;
+const { primary, secondary, tertiary, grey, pink, green, yellow, blue, black } = Colors;
 
 export const StyledContainer = styled.View`
     flex: 1;
@@ -34,8 +35,7 @@ export const InnerContainer = styled.View`
 
 export const HomeContainer = styled(InnerContainer)`
     padding: 25px;
-    padding-top: 10px;
-    justify-content: center;
+    padding-top: ${StatusBarHeight + 40}px;
     background-color: ${primary};
 `;
 
@@ -63,9 +63,13 @@ export const StyledTextInput = styled.TextInput`
     padding-right: 55px;
     border-radius: 5px;
     font-size: 16px;
-    height: 60px; 
+    height: ${props => props.answer ? '300px' : '60px'}; 
     margin-vertical: 3px;
     margin-bottom: 10px;
+
+    ${(props) => props.cardCreate && `
+        padding-left: 15px;
+    `}
 `;
 
 export const StyledInputLabel = styled.Text`
@@ -96,6 +100,12 @@ export const ButtonText = styled.Text`
 
     ${(props) => props.google == true && `
         padding-left: 20px;
+    `}
+
+    ${(props) => props.create == true && `
+        font-size: 39px;
+        color: lightgrey;
+        padding-bottom: 5px;
     `}
 `;
 
@@ -158,3 +168,27 @@ export const Avatar = styled.Image`
     margin-top: 10px;
     margin-bottom: 10px;
 `
+export const CategoryButton = styled.TouchableOpacity`
+    padding: 15px;
+    background-color: ${green};
+    border-radius: 5px;
+    margin-vertical: 5px;
+    height: 100px;
+    border: 1px solid ${black};
+`
+export const CategoryText = styled.Text`
+    color: ${black};
+    font-size: 20px;
+    font-weight: bold;
+`;
+
+export const CreateLink = styled.TouchableOpacity`
+    width: 60px; 
+    height: 60px;
+    align-items: center;
+    border-radius: 50px;
+    background-color: ${primary};
+    border: 3px solid lightgrey;
+`;
+
+

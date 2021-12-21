@@ -15,12 +15,15 @@ import {
     InnerContainer,
     SubTitle,
     StyledFormArea,
-    StyledButton,
     ButtonText,
     Line,
+    CategoryButton,
+    CategoryText,
+    CreateLink,
+    StyledButton
 } from './../components/styles';
 
-const Home = () => {
+const Home = ({navigation}) => {
     
     // context
     const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
@@ -43,12 +46,16 @@ const Home = () => {
                     <SubTitle home={true}>Welcome, {username || 'friend'}!</SubTitle>
                     <StyledFormArea>
                         <Line/>
-                        <StyledButton onPress={clearLogin}>
+                        {/* <StyledButton onPress={clearLogin}>
                             <ButtonText>Logout</ButtonText>
-                        </StyledButton>
-                        
+                        </StyledButton> */}
+                        <CategoryButton>
+                            <CategoryText>Category</CategoryText>
+                        </CategoryButton>
                     </StyledFormArea>
-
+                    <CreateLink onPress={() => navigation.navigate('Create')}>
+                        <ButtonText create={true}>+</ButtonText>
+                    </CreateLink>
                 </HomeContainer>
             </InnerContainer>
         </>
