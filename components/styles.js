@@ -17,7 +17,7 @@ export const Colors = {
     black: "#000000"
 }
 
-const { primary, secondary, tertiary, grey, pink, green, yellow, blue, black } = Colors;
+const { primary, secondary, tertiary, grey, pink, green, yellow, blue, black, orange } = Colors;
 
 export const StyledContainer = styled.View`
     flex: 1;
@@ -104,7 +104,7 @@ export const ButtonText = styled.Text`
 
     ${(props) => props.create == true && `
         font-size: 39px;
-        color: lightgrey;
+        color: black;
         padding-bottom: 5px;
     `}
 `;
@@ -170,15 +170,16 @@ export const Avatar = styled.Image`
 `
 export const CategoryButton = styled.TouchableOpacity`
     padding: 15px;
-    background-color: ${green};
+    background-color: ${tertiary};
     border-radius: 5px;
     margin-vertical: 5px;
-    height: 100px;
-    border: 1px solid ${black};
+    height: 60px;
+    justify-content: center;
+    align-items: center;
 `
 export const CategoryText = styled.Text`
     color: ${black};
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 `;
 
@@ -188,7 +189,8 @@ export const CreateLink = styled.TouchableOpacity`
     align-items: center;
     border-radius: 50px;
     background-color: ${primary};
-    border: 3px solid lightgrey;
+    border: 3px solid black;
+    margin-top: 10px;
 `;
 
 

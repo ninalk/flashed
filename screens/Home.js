@@ -50,10 +50,10 @@ const Home = ({navigation}) => {
                             <ButtonText>Logout</ButtonText>
                         </StyledButton> */}
                         <CategoryButton>
-                            <CategoryText>Category</CategoryText>
+                            <CategoryText>JavaScript</CategoryText>
                         </CategoryButton>
                     </StyledFormArea>
-                    <CreateLink onPress={() => navigation.navigate('Create')}>
+                    <CreateLink onPress={() => navigation.navigate('CategoryForm')}>
                         <ButtonText create={true}>+</ButtonText>
                     </CreateLink>
                 </HomeContainer>

@@ -9,7 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './../screens/Login';
 import Signup from './../screens/Signup';
 import Home from './../screens/Home';
-import Create from './../screens/Create';
+import CategoryForm from '../screens/CategoryForm';
 
 const Stack = createNativeStackNavigator();
 const { pink, primary } = Colors;
@@ -39,7 +39,7 @@ const RootStack = () => {
                     {storedCredentials ? (
                         <>
                             <Stack.Screen options={{headerTintColor: primary}} name="Home" component={Home} />
-                            <Stack.Screen name="Create" component={Create} />
+                            <Stack.Screen name="CategoryForm" component={CategoryForm} />
                         </>
                     ) : (
                         <>

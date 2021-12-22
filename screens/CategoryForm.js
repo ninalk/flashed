@@ -3,9 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator } from 'react-native';
 import { Formik } from 'formik';
 
-// logo
-import FlashedLogo from './../components/FlashedLogo';
-
 import {
     HomeContainer,
     InnerContainer,
@@ -21,7 +18,7 @@ import {
     StyledTextInput,
     Colors,
     MsgBox
-} from './../components/styles';
+} from '../components/styles';
 
 // import keyboard avoiding wrapper
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
@@ -29,8 +26,8 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 // colors
 const { grey, primary, tertiary } = Colors;
 
-const Create = () => {
-    const handleCardCreate = (values, setSubmitting) => {
+const CategoryForm = () => {
+    const handleCategoryCreate = (values, setSubmitting) => {
         console.log(values)
     }
 
@@ -39,15 +36,14 @@ const Create = () => {
         <StatusBar style="dark" />
         <InnerContainer>
             <HomeContainer>
-                <FlashedLogo />
-                <SubTitle>Create a flash card</SubTitle>
+                <SubTitle>Create a Category</SubTitle>
                 <Formik
-                        initialValues={{category: '', question: '', answer: ''}}
+                        initialValues={{category: ''}}
                         onSubmit={(values, {setSubmitting, resetForm}) => {
-                            if (values.category == '' || values.question == '' || values.answer == '') {
+                            if (values.category == '') {
                                 setSubmitting(false);
                             } else {
-                                handleCardCreate(values, setSubmitting);
+                                handleCategoryCreate(values, setSubmitting);
                                 resetForm();
                             }
                         }}
@@ -60,7 +56,7 @@ const Create = () => {
                                 onBlur={handleBlur('category')}
                                 value={values.category}
                             />
-                            <MyTextInput
+                            {/* <MyTextInput
                                 label="Question"
                                 onChangeText={handleChange('question')}
                                 onBlur={handleBlur('question')}
@@ -72,12 +68,12 @@ const Create = () => {
                                 onBlur={handleBlur('answer')}
                                 value={values.answer}
                                 answer={true}
-                            />
+                            /> */}
 
                             {/* <MsgBox type={messageType}>{message}</MsgBox> */}
                             {!isSubmitting && (
                                 <StyledButton onPress={handleSubmit} >
-                                    <ButtonText>Add Card</ButtonText>
+                                    <ButtonText>Add Category</ButtonText>
                                 </StyledButton>
                             )}
                             {isSubmitting && (
@@ -103,4 +99,4 @@ const MyTextInput = ({label, ...props}) => {
     )
 }
 
-export default Create;
+export default CategoryForm;
