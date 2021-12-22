@@ -3,6 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator } from 'react-native';
 import { Formik } from 'formik';
 
+// API client
+import axios from 'axios';
+
 import {
     HomeContainer,
     InnerContainer,
@@ -17,7 +20,6 @@ import {
     StyledInputLabel,
     StyledTextInput,
     Colors,
-    MsgBox
 } from '../components/styles';
 
 // import keyboard avoiding wrapper
@@ -26,9 +28,23 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 // colors
 const { grey, primary, tertiary } = Colors;
 
-const CategoryForm = () => {
+const CategoryForm = ({navigation}) => {
+    
     const handleCategoryCreate = (values, setSubmitting) => {
-        console.log(values)
+        // const url = 'https://glacial-hollows-41394.herokuapp.com/users/login';
+        const url = 'http://192.168.1.2:3000/categories/new';
+
+        axios.post(url, values)
+        .then((res) => {
+            const result = res.data;
+            console.log(result, ' in create')
+            setSubmitting(false);
+            navigation.navigate('Home');
+        })
+        .catch((err) => {
+            console.log(err)
+            setSubmitting(false);
+        })
     }
 
     return (

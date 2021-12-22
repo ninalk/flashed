@@ -1,5 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import CategoryList from './../components/CategoryList';
+
+// API client
+import axios from 'axios';
 
 // credentials context
 import { CredentialsContext } from './../components/CredentialsContext';
@@ -17,25 +21,42 @@ import {
     StyledFormArea,
     ButtonText,
     Line,
-    CategoryButton,
-    CategoryText,
     CreateLink,
-    StyledButton
 } from './../components/styles';
 
-const Home = ({navigation}) => {
-    
+const Home = ({navigation}) => {   
     // context
     const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
     const { username } = storedCredentials;
+
+    const [categories, setCategories] = useState([]);
+
+    const getCategories = () => {
+        // const url = 'https://glacial-hollows-41394.herokuapp.com/users/login';
+        const url = 'http://192.168.1.2:3000/categories';
+
+        axios.get(url, categories)
+        .then((res) => {
+            const result = res.data;
+            console.log(result.data)
+
+            setCategories([...result.data])
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
 
     const clearLogin = () => {
         AsyncStorage.removeItem('flashedCredentials')
         .then(() => {
             setStoredCredentials("");
         })
-        .catch(err => console.log(err))
     }
+
+    useEffect(() => {
+        getCategories();
+    }, [categories]);
 
     return (
         <>
@@ -49,9 +70,7 @@ const Home = ({navigation}) => {
                         {/* <StyledButton onPress={clearLogin}>
                             <ButtonText>Logout</ButtonText>
                         </StyledButton> */}
-                        <CategoryButton>
-                            <CategoryText>JavaScript</CategoryText>
-                        </CategoryButton>
+                        <CategoryList categories={categories} />
                     </StyledFormArea>
                     <CreateLink onPress={() => navigation.navigate('CategoryForm')}>
                         <ButtonText create={true}>+</ButtonText>
@@ -61,6 +80,5 @@ const Home = ({navigation}) => {
         </>
     )
 }
-
 
 export default Home;
