@@ -22,6 +22,7 @@ import {
     ButtonText,
     Line,
     CreateLink,
+    StyledButton
 } from './../components/styles';
 
 const Home = ({navigation}) => {   
@@ -38,8 +39,6 @@ const Home = ({navigation}) => {
         axios.get(url, categories)
         .then((res) => {
             const result = res.data;
-            console.log(result.data)
-
             setCategories([...result.data])
         })
         .catch((err) => {
@@ -56,7 +55,7 @@ const Home = ({navigation}) => {
 
     useEffect(() => {
         getCategories();
-    }, [categories]);
+    }, []);
 
     return (
         <>
