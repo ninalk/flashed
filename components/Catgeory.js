@@ -1,13 +1,12 @@
 import React from 'react';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { Text } from 'react-native';
+import { Text, Animated } from 'react-native';
 import { CategoryButton, CategoryText, DeleteView} from './styles';
 
 const Category = ({ item, getCategoryDetails, removeCategory }) => {
     
     const handleDelete = () => {
         const categoryId = item._id;
-        console.log('handle delete')
         removeCategory(categoryId);
     }
     

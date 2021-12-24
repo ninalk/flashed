@@ -29,7 +29,7 @@ import {
 import KeyboardAvoidingWrapper from './../components/KeyboardAvoidingWrapper';
 
 // colors
-const { grey, primary, tertiary } = Colors;
+const { primary } = Colors;
 
 const CategoryForm = ({navigation}) => {
     // context
@@ -43,7 +43,6 @@ const CategoryForm = ({navigation}) => {
         axios.post(url, values)
         .then((res) => {
             const result = res.data;
-            console.log(result, ' new category')
             setSubmitting(false);
             navigation.navigate('Home');
         })
@@ -108,7 +107,6 @@ const CategoryForm = ({navigation}) => {
                     </Formik>
             </FormContainer>
         </InnerContainer>
-
         </KeyboardAvoidingWrapper>
     )
 }

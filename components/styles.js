@@ -228,7 +228,7 @@ export const LogoutButton = styled.TouchableOpacity`
 `;
 
 export const DeleteView = styled.TouchableOpacity`
-    padding: 15px;
+    padding-horizontal: 30px;
     background-color: ${grey};
     border-radius: 5px;
     margin-vertical: 5px;

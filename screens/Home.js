@@ -24,16 +24,18 @@ import {
 
 // icons
 import { Octicons } from '@expo/vector-icons';
+import { useNavigationState } from '@react-navigation/native';
 
 // colors
 const { black } = Colors;
 
-const Home = ({navigation}) => {   
+const Home = ({navigation }) => {   
     // context
     const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
     const { username } = storedCredentials;
 
     const [categories, setCategories] = useState([]);
+    const state = useNavigationState(state => state);
 
     const getCategories = () => {
         // const url = 'https://glacial-hollows-41394.herokuapp.com/users/login';
@@ -55,7 +57,9 @@ const Home = ({navigation}) => {
         const url = 'http://192.168.1.2:3000/categories/' + categoryId;
 
         axios.delete(url, categoryId)
-        .then((res) => {})
+        .then((res) => {
+            getCategories();
+        })
         .catch((err) => {console.log(err)})
     }
 
@@ -82,7 +86,7 @@ const Home = ({navigation}) => {
 
     useEffect(() => {
         getCategories();
-    }, []);
+    }, [state]);
 
     return (
         <>
