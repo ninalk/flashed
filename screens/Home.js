@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { FlatList } from 'react-native';
 import Category from './../components/Catgeory';
@@ -24,7 +24,6 @@ import {
 
 // icons
 import { Octicons } from '@expo/vector-icons';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 // colors
 const { black } = Colors;
