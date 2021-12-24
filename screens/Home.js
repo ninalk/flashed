@@ -49,6 +49,17 @@ const Home = ({navigation}) => {
         })
     }
 
+    // remove category
+    const removeCategory = (categoryId) => {
+        // const url = 'https://glacial-hollows-41394.herokuapp.com/users/login';
+        const url = 'http://192.168.1.2:3000/categories/' + categoryId;
+
+        axios.delete(url, categoryId)
+        .then((res) => {})
+        .catch((err) => {console.log(err)})
+    }
+
+    // logout user
     const clearLogin = () => {
         AsyncStorage.removeItem('flashedCredentials')
         .then(() => {
@@ -64,8 +75,9 @@ const Home = ({navigation}) => {
         });
     }
 
+    // renders list view of each category
     const renderItem = ({ item }) => (
-        <Category item={item} getCategoryDetails={getCategoryDetails} />
+        <Category item={item} getCategoryDetails={getCategoryDetails} removeCategory={removeCategory}/>
     );
 
     useEffect(() => {
