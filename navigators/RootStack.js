@@ -11,6 +11,7 @@ import Signup from './../screens/Signup';
 import Home from './../screens/Home';
 import CategoryForm from './../screens/CategoryForm';
 import CategoryDetails from './../screens/CategoryDetails';
+import CardForm from './../screens/CardForm';
 
 const Stack = createNativeStackNavigator();
 const { pink, primary } = Colors;
@@ -69,7 +70,9 @@ const RootStack = () => {
                                     },
                                 }} 
                                 name="CategoryDetails" 
-                                component={CategoryDetails} />
+                                component={CategoryDetails} 
+                            />
+                            <Stack.Screen name="CardForm" component={CardForm} />
                         </>
                     ) : (
                         <>

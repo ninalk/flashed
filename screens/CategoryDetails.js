@@ -1,14 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { View, Text } from 'react-native';
 
 // API client
 import axios from 'axios';
 
-// credentials context
-import { CredentialsContext } from './../components/CredentialsContext';
-
 import {
-    DetailsContainer,
+    HomeContainer,
     InnerContainer,
     SubTitle,
     StyledFormArea,
@@ -29,24 +27,33 @@ const CategoryDetails = ({ route, navigation }) => {
         axios.get(url, cards)
         .then((res) => {
             const result = res.data;
-            // setCards([...result.data])
+            console.log(result.data.cards)
+            setCards([...result.data.cards])
         })
         .catch((err) => {
             console.log(err)
         })
     }
 
-    // useEffect(() => {
-    //     getCards();
-    // }, []);
+    useEffect(() => {
+        getCards();
+    }, []);
 
     return (
         <>
             <StatusBar style="dark" />
             <InnerContainer>
-                <DetailsContainer>
+                <HomeContainer>
                     <SubTitle>{category}</SubTitle>
-                </DetailsContainer>
+                    <StyledFormArea>
+
+                    </StyledFormArea>
+                    <CreateLink onPress={() => navigation.navigate('CardForm', {
+                        categoryId: categoryId
+                    })}>
+                        <ButtonText create={true}>+</ButtonText>
+                    </CreateLink>
+                </HomeContainer>
             </InnerContainer>
         </>
     )

@@ -43,11 +43,6 @@ export const FormContainer = styled(InnerContainer)`
     padding: 10px;
     padding-top: ${StatusBarHeight + 50}px;
 `
-export const DetailsContainer = styled(InnerContainer)`
-    background-color: ${primary};
-    padding: 10px;
-    padding-top: ${StatusBarHeight + 50}px;
-`
 
 export const SubTitle = styled.Text`
     font-size: 20px;
@@ -64,6 +59,7 @@ export const SubTitle = styled.Text`
 
 export const StyledFormArea = styled.View`
     width: 90%;
+    height: 82%;
 `;
 
 export const StyledTextInput = styled.TextInput`
@@ -73,12 +69,20 @@ export const StyledTextInput = styled.TextInput`
     padding-right: 55px;
     border-radius: 5px;
     font-size: 16px;
-    height: ${props => props.answer ? '300px' : '60px'}; 
+    height: 60px;
     margin-vertical: 3px;
     margin-bottom: 10px;
 
     ${(props) => props.cardCreate && `
         padding-left: 15px;
+    `}
+
+    ${(props) => props.answer && `
+        height: 460px;
+    `}
+
+    ${(props) => props.question && `
+        height: 100px;
     `}
 `;
 
@@ -185,7 +189,9 @@ export const CategoryButton = styled.TouchableOpacity`
     margin-vertical: 5px;
     height: 60px;
     justify-content: space-between;
+    align-items: center;
     flex-direction: row;
+    margin-top: 0;
 `
 export const CategoryText = styled.Text`
     color: ${black};

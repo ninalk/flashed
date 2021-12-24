@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { FlatList } from 'react-native';
 import Category from './../components/Catgeory';
@@ -15,7 +15,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
     HomeContainer,
     InnerContainer,
-    SubTitle,
     StyledFormArea,
     ButtonText,
     CreateLink,
@@ -25,6 +24,7 @@ import {
 
 // icons
 import { Octicons } from '@expo/vector-icons';
+import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 // colors
 const { black } = Colors;
@@ -43,7 +43,6 @@ const Home = ({navigation}) => {
         axios.get(url, categories)
         .then((res) => {
             const result = res.data;
-            result.data.reverse();
             setCategories([...result.data])
         })
         .catch((err) => {
