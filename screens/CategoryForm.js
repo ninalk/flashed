@@ -10,7 +10,7 @@ import axios from 'axios';
 import { CredentialsContext } from './../components/CredentialsContext';
 
 import {
-    HomeContainer,
+    FormContainer,
     InnerContainer,
     SubTitle,
     StyledFormArea,
@@ -57,7 +57,7 @@ const CategoryForm = ({navigation}) => {
         <KeyboardAvoidingWrapper>
         <StatusBar style="dark" />
         <InnerContainer>
-            <HomeContainer>
+            <FormContainer>
                 <SubTitle>Create a Category</SubTitle>
                 <Formik
                         initialValues={{category: ''}}
@@ -106,7 +106,7 @@ const CategoryForm = ({navigation}) => {
                         </StyledFormArea> )}
 
                     </Formik>
-            </HomeContainer>
+            </FormContainer>
         </InnerContainer>
 
         </KeyboardAvoidingWrapper>

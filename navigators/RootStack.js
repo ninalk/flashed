@@ -9,7 +9,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './../screens/Login';
 import Signup from './../screens/Signup';
 import Home from './../screens/Home';
-import CategoryForm from '../screens/CategoryForm';
+import CategoryForm from './../screens/CategoryForm';
+import CategoryDetails from './../screens/CategoryDetails';
 
 const Stack = createNativeStackNavigator();
 const { pink, primary } = Colors;
@@ -38,8 +39,37 @@ const RootStack = () => {
                     >
                     {storedCredentials ? (
                         <>
-                            <Stack.Screen options={{headerTintColor: primary}} name="Home" component={Home} />
+                            <Stack.Screen 
+                                options={{
+                                    headerTitle: 'My Decks',
+                                    headerStyle: {
+                                        backgroundColor: primary,
+                                    },
+                                    headerTransparent: false,
+                                    headerTintColor: '#000',
+                                    headerTitleStyle: {
+                                        fontWeight: 'bold',
+                                    },
+                                }}
+                                name="Home" 
+                                component={Home} 
+                                 
+                            />
                             <Stack.Screen name="CategoryForm" component={CategoryForm} />
+                            <Stack.Screen
+                                options={{
+                                    headerTitle: 'Details',
+                                    headerStyle: {
+                                        backgroundColor: primary,
+                                    },
+                                    headerTransparent: false,
+                                    headerTintColor: '#000',
+                                    headerTitleStyle: {
+                                        fontWeight: 'bold',
+                                    },
+                                }} 
+                                name="CategoryDetails" 
+                                component={CategoryDetails} />
                         </>
                     ) : (
                         <>

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import CategoryList from './../components/CategoryList';
+import { FlatList } from 'react-native';
+import Category from './../components/Catgeory';
 
 // API client
 import axios from 'axios';
@@ -11,19 +12,22 @@ import { CredentialsContext } from './../components/CredentialsContext';
 // async storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// logo
-import FlashedLogo from './../components/FlashedLogo';
-
 import {
     HomeContainer,
     InnerContainer,
     SubTitle,
     StyledFormArea,
     ButtonText,
-    Line,
     CreateLink,
-    StyledButton
+    LogoutButton,
+    Colors
 } from './../components/styles';
+
+// icons
+import { Octicons } from '@expo/vector-icons';
+
+// colors
+const { black } = Colors;
 
 const Home = ({navigation}) => {   
     // context
@@ -39,6 +43,7 @@ const Home = ({navigation}) => {
         axios.get(url, categories)
         .then((res) => {
             const result = res.data;
+            result.data.reverse();
             setCategories([...result.data])
         })
         .catch((err) => {
@@ -53,6 +58,18 @@ const Home = ({navigation}) => {
         })
     }
 
+    // onClick navigate to details screen
+    const getCategoryDetails = ({item}) => {
+        navigation.navigate('CategoryDetails', {
+            categoryId: item._id,
+            category: item.category
+        });
+    }
+
+    const renderItem = ({ item }) => (
+        <Category item={item} getCategoryDetails={getCategoryDetails} />
+    );
+
     useEffect(() => {
         getCategories();
     }, []);
@@ -62,18 +79,19 @@ const Home = ({navigation}) => {
             <StatusBar style="dark" />
             <InnerContainer>
                 <HomeContainer>
-                    <FlashedLogo />
-                    <SubTitle home={true}>Welcome, {username || 'friend'}!</SubTitle>
                     <StyledFormArea>
-                        <Line/>
-                        {/* <StyledButton onPress={clearLogin}>
-                            <ButtonText>Logout</ButtonText>
-                        </StyledButton> */}
-                        <CategoryList categories={categories} />
+                        <FlatList 
+                            data={categories}
+                            keyExtractor={(item) => item._id}
+                            renderItem={renderItem}
+                        />
                     </StyledFormArea>
                     <CreateLink onPress={() => navigation.navigate('CategoryForm')}>
                         <ButtonText create={true}>+</ButtonText>
                     </CreateLink>
+                    <LogoutButton onPress={clearLogin}>
+                        <Octicons name="sign-out" size={50} color={black} />
+                    </LogoutButton>
                 </HomeContainer>
             </InnerContainer>
         </>

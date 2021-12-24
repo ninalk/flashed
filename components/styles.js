@@ -14,7 +14,7 @@ export const Colors = {
     yellow: "rgb(244, 210, 93)",
     blue: "rgb(100, 168, 192)",
     orange: "rgb(232, 126, 60)",
-    black: "#000000"
+    black: "rgb(28, 28, 28)"
 }
 
 const { primary, secondary, tertiary, grey, pink, green, yellow, blue, black, orange } = Colors;
@@ -34,10 +34,20 @@ export const InnerContainer = styled.View`
 `;
 
 export const HomeContainer = styled(InnerContainer)`
-    padding: 25px;
-    padding-top: ${StatusBarHeight + 40}px;
+    padding: 10px;
     background-color: ${primary};
 `;
+
+export const FormContainer = styled(InnerContainer)`
+    background-color: ${primary};
+    padding: 10px;
+    padding-top: ${StatusBarHeight + 50}px;
+`
+export const DetailsContainer = styled(InnerContainer)`
+    background-color: ${primary};
+    padding: 10px;
+    padding-top: ${StatusBarHeight + 50}px;
+`
 
 export const SubTitle = styled.Text`
     font-size: 20px;
@@ -174,8 +184,8 @@ export const CategoryButton = styled.TouchableOpacity`
     border-radius: 5px;
     margin-vertical: 5px;
     height: 60px;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
 `
 export const CategoryText = styled.Text`
     color: ${black};
@@ -189,8 +199,24 @@ export const CreateLink = styled.TouchableOpacity`
     align-items: center;
     border-radius: 50px;
     background-color: ${primary};
-    border: 3px solid black;
-    margin-top: 10px;
+    border: 3px solid ${black};
+    margin-bottom: 10px;
+    position: absolute;
+    right: 30px;
+    top: 85%;
 `;
 
-
+export const FooterStyle = styled.View`
+    width: 100%;
+    height: 100px;
+    background-color: ${primary};
+`
+export const LogoutButton = styled.TouchableOpacity`
+    width: 60px; 
+    height: 60px;
+    align-items: center;
+    background-color: ${primary};
+    position: absolute;
+    left: 28px;
+    top: 86%;
+`;
