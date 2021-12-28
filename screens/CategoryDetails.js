@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text } from 'react-native';
+import Carousel from './../components/Carousel';
 
 // API client
 import axios from 'axios';
@@ -27,7 +28,7 @@ const CategoryDetails = ({ route, navigation }) => {
         axios.get(url, cards)
         .then((res) => {
             const result = res.data;
-            console.log(result.data.cards)
+            console.log(result.data.cards, ' cards')
             setCards([...result.data.cards])
         })
         .catch((err) => {
@@ -45,9 +46,7 @@ const CategoryDetails = ({ route, navigation }) => {
             <InnerContainer>
                 <HomeContainer>
                     <SubTitle>{category}</SubTitle>
-                    <StyledFormArea>
-
-                    </StyledFormArea>
+                    <Carousel cards={cards} />
                     <CreateLink onPress={() => navigation.navigate('CardForm', {
                         categoryId: categoryId
                     })}>

@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import Constants from 'expo-constants';
+import { Dimensions } from 'react-native';
 
 const StatusBarHeight = Constants.statusBarHeight;
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 // colors
 export const Colors = {
@@ -236,4 +239,33 @@ export const DeleteView = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
     margin-top: 0;
+`
+export const SlideView = styled.View`
+    height: ${windowHeight - 300}px;
+    width: ${windowWidth - 18}px;
+    justify-content: center;
+    align-items: center;
+`
+
+export const QuestionView = styled.View`
+    background-color: ${secondary};
+    padding: 15px;
+    border-radius: 5px;
+    height: 100px;
+    width: ${windowWidth * 0.9}px;
+    margin-vertical: 3px;
+    margin-bottom: 10px;
+`;
+
+export const AnswerView = styled.View`
+    background-color: ${secondary};
+    padding: 15px;
+    border-radius: 5px;
+    height: 460px;
+    width: ${windowWidth * 0.9}px;
+    margin-vertical: 3px;
+`;
+
+export const StyledText = styled.Text`
+    font-size: 16px;
 `
