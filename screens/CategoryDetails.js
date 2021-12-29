@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text } from 'react-native';
 import Carousel from './../components/Carousel';
 
 // API client
@@ -9,12 +8,8 @@ import axios from 'axios';
 import {
     HomeContainer,
     InnerContainer,
-    SubTitle,
-    StyledFormArea,
     ButtonText,
-    Line,
     CreateLink,
-    EditButton
 } from './../components/styles';
 
 const CategoryDetails = ({ route, navigation }) => {   
@@ -45,10 +40,7 @@ const CategoryDetails = ({ route, navigation }) => {
             <StatusBar style="dark" />
             <InnerContainer>
                 <HomeContainer>
-                    <Carousel cards={cards} />
-                    {/* <EditButton>
-                        <ButtonText edit={true}>Edit</ButtonText>
-                    </EditButton> */}
+                    <Carousel cards={cards} navigation={navigation} />
                     <CreateLink onPress={() => navigation.navigate('CardForm', {
                         categoryId: categoryId
                     })}>

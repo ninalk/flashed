@@ -19,24 +19,26 @@ import {
 } from '../components/styles';
 
 // import keyboard avoiding wrapper
-import KeyboardAvoidingWrapper from './../components/KeyboardAvoidingWrapper';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 // colors
 const { primary } = Colors;
 
-const CardForm = ({ route, navigation }) => {
-    const { categoryId } = route.params;
+const EditCardForm = ({ route, navigation }) => {
+    const { cardId, question, answer } = route.params;
+    console.log(route.params, ' route params in edit')
 
-    const handleCardCreate = (values, setSubmitting) => {
+    const handleEditCard = (values, setSubmitting) => {
         // const url = 'https://glacial-hollows-41394.herokuapp.com/users/login';
-        const url = 'http://192.168.1.2:3000/categories/' + categoryId + '/cards';
+        const url = `http://192.168.1.2:3000/cards/${cardId}`;
         console.log(url, values)
 
-        axios.post(url, values)
+        axios.put(url, values)
         .then((res) => {
             const result = res.data;
-            console.log(result, ' new card')
+            console.log(result, ' edited card')
             setSubmitting(false);
+            navigation.navigate('Home');
         })
         .catch((err) => {
             console.log(err)
@@ -49,14 +51,13 @@ const CardForm = ({ route, navigation }) => {
         <StatusBar style="dark" />
         <InnerContainer>
             <FormContainer>
-                <SubTitle>Create a Card</SubTitle>
                 <Formik
-                        initialValues={{question: '', answer: ''}}
+                        initialValues={{question: question, answer: answer}}
                         onSubmit={(values, {setSubmitting, resetForm}) => {
                             if (values.question == '' || values.answer == '') {
                                 setSubmitting(false);
                             } else {
-                                handleCardCreate(values, setSubmitting);
+                                handleEditCard(values, setSubmitting);
                                 resetForm();
                             }
                         }}
@@ -79,7 +80,7 @@ const CardForm = ({ route, navigation }) => {
                             />
                             {!isSubmitting && (
                                 <StyledButton onPress={handleSubmit} >
-                                    <ButtonText>Add Flash Card</ButtonText>
+                                    <ButtonText>Update</ButtonText>
                                 </StyledButton>
                             )}
                             {isSubmitting && (
@@ -90,7 +91,6 @@ const CardForm = ({ route, navigation }) => {
                     </Formik>
             </FormContainer>
         </InnerContainer>
-
         </KeyboardAvoidingWrapper>
     )
 }
@@ -108,4 +108,4 @@ const MyTextInput = ({label, ...props}) => {
     )
 }
 
-export default CardForm;
+export default EditCardForm;

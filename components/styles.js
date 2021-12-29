@@ -28,7 +28,7 @@ const { primary, secondary, tertiary, grey, white, green, blue, black, main, mai
 export const StyledContainer = styled.View`
     flex: 1;
     padding: 25px;
-    padding-top: ${StatusBarHeight + 100}px;
+    padding-top: ${StatusBarHeight + 80}px;
     background-color: ${primary};
     padding-bottom: 250px;
 `;
@@ -47,7 +47,7 @@ export const HomeContainer = styled(InnerContainer)`
 export const FormContainer = styled(InnerContainer)`
     background-color: ${primary};
     padding: 10px;
-    padding-top: ${StatusBarHeight + 50}px;
+    ${'' /* padding-top: ${StatusBarHeight}px; */}
 `
 
 export const SubTitle = styled.Text`
@@ -126,6 +126,7 @@ export const ButtonText = styled.Text`
         font-size: 39px;
         color: ${main2};
         padding-bottom: 5px;
+        box-shadow: 0 0 3px ${main2};
     `}
 
     ${(props) => props.edit == true && `
@@ -223,6 +224,7 @@ export const CreateLink = styled.TouchableOpacity`
     position: absolute;
     right: 30px;
     top: 85%;
+    box-shadow: 0 0 3px ${main2};
 `;
 
 export const FooterStyle = styled.View`
@@ -240,8 +242,14 @@ export const LogoutButton = styled.TouchableOpacity`
     top: 86%;
 `;
 
-export const EditButton = styled(LogoutButton)`
+export const EditLink = styled.TouchableOpacity`
+    background-color: ${primary};
+    margin-bottom: 10px;
+`
+export const EditText = styled.Text`
     color: ${main2};
+    font-size: 16px;
+    font-weight: bold;
 `
 export const DeleteView = styled.TouchableOpacity`
     padding-horizontal: 30px;
@@ -260,32 +268,20 @@ export const SlideView = styled.View`
     text-align: left;
 `
 
-export const QuestionView = styled.View`
+export const CardView = styled.View`
     background-color: ${tertiary};
     padding: 15px;
     border-radius: 5px;
-    height: 100px;
+    height: ${props => props.question ? '100px' : '460px'};
     width: ${windowWidth * 0.9}px;
     margin-vertical: 3px;
     margin-bottom: 10px;
     align-self: center; 
 `;
 
-export const AnswerView = styled.View`
-    background-color: ${tertiary};
-    padding: 15px;
-    border-radius: 5px;
-    height: 460px;
-    width: ${windowWidth * 0.9}px;
-    margin-vertical: 3px;
-    margin-bottom: 10px;
-    align-self: center;
-`;
-
 export const StyledText = styled.Text`
     font-size: 16px;
     color: ${main};
-    align-self: center;
 `
 export const StyledViewLabel = styled.Text`
     color: ${main2};
@@ -293,3 +289,10 @@ export const StyledViewLabel = styled.Text`
     margin-left: 12px;
     padding-bottom: 3px;
 `;
+
+export const SlideFooter = styled.View`
+    width: ${windowWidth * 0.9}px;
+    padding-left: 15px;
+    flex-direction: row;
+    justify-content: space-between;
+`

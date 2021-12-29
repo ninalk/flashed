@@ -104,7 +104,7 @@ const Home = ({navigation }) => {
                         <ButtonText create={true}>+</ButtonText>
                     </CreateLink>
                     <LogoutButton onPress={clearLogin}>
-                        <Octicons name="sign-out" size={50} color={main2} />
+                        <Octicons name="sign-out" size={50} color={main2}/>
                     </LogoutButton>
                 </HomeContainer>
             </InnerContainer>

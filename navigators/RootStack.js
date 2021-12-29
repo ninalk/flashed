@@ -1,5 +1,5 @@
 import React from 'react';
-import { Colors } from './../components/styles';
+import { Colors, RightIcon } from './../components/styles';
 
 // react navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,6 +12,7 @@ import Home from './../screens/Home';
 import CategoryForm from './../screens/CategoryForm';
 import CategoryDetails from './../screens/CategoryDetails';
 import CardForm from './../screens/CardForm';
+import EditCardForm from './../screens/EditCardForm';
 
 const Stack = createNativeStackNavigator();
 const { main, primary } = Colors;
@@ -30,7 +31,7 @@ const RootStack = () => {
                             headerStyle: {
                                 backgroundColor: 'transparent'
                             },
-                            headerTintColor: main,
+                            headerTintColor: primary,
                             headerTransparent: true,
                             headerTitle: '',
                             headerLeftContainerStyle: {
@@ -56,7 +57,18 @@ const RootStack = () => {
                                 component={Home} 
                                  
                             />
-                            <Stack.Screen name="CategoryForm" component={CategoryForm} />
+                            <Stack.Screen name="CategoryForm" component={CategoryForm} 
+                                options={{
+                                    headerStyle: {
+                                        backgroundColor: primary,
+                                    },
+                                    headerTransparent: false,
+                                    headerTintColor: main,
+                                    headerTitleStyle: {
+                                        fontWeight: 'bold',
+                                    },
+                                }}
+                            />
                             <Stack.Screen
                                 options={({route}) => ({
                                     headerTitle: route.params.category,
@@ -72,7 +84,30 @@ const RootStack = () => {
                                 name="CategoryDetails" 
                                 component={CategoryDetails} 
                             />
-                            <Stack.Screen name="CardForm" component={CardForm} />
+                            <Stack.Screen name="EditCard" component={EditCardForm} 
+                                options={{
+                                    headerStyle: {
+                                        backgroundColor: primary,
+                                    },
+                                    headerTransparent: false,
+                                    headerTintColor: main,
+                                    headerTitleStyle: {
+                                        fontWeight: 'bold',
+                                    },
+                                }}
+                            />
+                            <Stack.Screen name="CardForm" component={CardForm} 
+                                options={{
+                                    headerStyle: {
+                                        backgroundColor: primary,
+                                    },
+                                    headerTransparent: false,
+                                    headerTintColor: main,
+                                    headerTitleStyle: {
+                                        fontWeight: 'bold',
+                                    },
+                                }}
+                            />
                         </>
                     ) : (
                         <>
