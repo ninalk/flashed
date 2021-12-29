@@ -14,7 +14,7 @@ import CategoryDetails from './../screens/CategoryDetails';
 import CardForm from './../screens/CardForm';
 
 const Stack = createNativeStackNavigator();
-const { pink, primary } = Colors;
+const { main, primary } = Colors;
 
 // credentials context
 import { CredentialsContext } from './../components/CredentialsContext';
@@ -30,7 +30,7 @@ const RootStack = () => {
                             headerStyle: {
                                 backgroundColor: 'transparent'
                             },
-                            headerTintColor: '#000',
+                            headerTintColor: main,
                             headerTransparent: true,
                             headerTitle: '',
                             headerLeftContainerStyle: {
@@ -47,7 +47,7 @@ const RootStack = () => {
                                         backgroundColor: primary,
                                     },
                                     headerTransparent: false,
-                                    headerTintColor: '#000',
+                                    headerTintColor: main,
                                     headerTitleStyle: {
                                         fontWeight: 'bold',
                                     },
@@ -58,17 +58,17 @@ const RootStack = () => {
                             />
                             <Stack.Screen name="CategoryForm" component={CategoryForm} />
                             <Stack.Screen
-                                options={{
-                                    headerTitle: 'Details',
+                                options={({route}) => ({
+                                    headerTitle: route.params.category,
                                     headerStyle: {
                                         backgroundColor: primary,
                                     },
                                     headerTransparent: false,
-                                    headerTintColor: '#000',
+                                    headerTintColor: main,
                                     headerTitleStyle: {
                                         fontWeight: 'bold',
                                     },
-                                }} 
+                                })} 
                                 name="CategoryDetails" 
                                 component={CategoryDetails} 
                             />

@@ -8,19 +8,22 @@ const windowHeight = Dimensions.get('window').height;
 
 // colors
 export const Colors = {
-    primary: "rgb(252, 247, 241)",
-    secondary: "rgb(255, 255, 255)",
-    tertiary: "rgb(172, 199, 28)",
+    primary: "rgb(228, 243, 224)",
+    secondary: "rgb(224, 242, 224)",
+    tertiary: "rgb(248, 253, 241)",
     grey: "rgb(206, 206, 206)",
     pink: "rgb(232, 146, 144)",
     green: "rgb(94, 145, 75)",
     yellow: "rgb(244, 210, 93)",
     blue: "rgb(100, 168, 192)",
     orange: "rgb(232, 126, 60)",
-    black: "rgb(28, 28, 28)"
+    main: "rgb(16, 71, 89)",
+    main1: "rgb(150, 205, 190)",
+    main2: "rgb(231, 203, 108)",
+    white: "rgb(255, 255, 255)"
 }
 
-const { primary, secondary, tertiary, grey, pink, green, yellow, blue, black, orange } = Colors;
+const { primary, secondary, tertiary, grey, white, green, blue, black, main, main1, main2 } = Colors;
 
 export const StyledContainer = styled.View`
     flex: 1;
@@ -51,7 +54,7 @@ export const SubTitle = styled.Text`
     font-size: 20px;
     text-align: center;
     font-weight: bold;
-    color: ${blue};
+    color: ${main};
     padding: 10px;
 
     ${(props) => props.home && `
@@ -66,7 +69,7 @@ export const StyledFormArea = styled.View`
 `;
 
 export const StyledTextInput = styled.TextInput`
-    background-color: ${secondary};
+    background-color: ${tertiary};
     padding: 15px;
     padding-left: 55px;
     padding-right: 55px;
@@ -97,7 +100,7 @@ export const StyledInputLabel = styled.Text`
 
 export const StyledButton = styled.TouchableOpacity`
     padding: 15px;
-    background-color: ${tertiary};
+    background-color: ${main2};
     justify-content: center;
     align-items: center;
     border-radius: 5px;
@@ -112,7 +115,7 @@ export const StyledButton = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
-    color: ${primary};
+    color: ${white};
     font-size: 16px;
 
     ${(props) => props.google == true && `
@@ -121,7 +124,13 @@ export const ButtonText = styled.Text`
 
     ${(props) => props.create == true && `
         font-size: 39px;
-        color: black;
+        color: ${main2};
+        padding-bottom: 5px;
+    `}
+
+    ${(props) => props.edit == true && `
+        font-size: 26px;
+        color: ${main2};
         padding-bottom: 5px;
     `}
 `;
@@ -187,7 +196,8 @@ export const Avatar = styled.Image`
 `
 export const CategoryButton = styled.TouchableOpacity`
     padding: 15px;
-    background-color: ${tertiary};
+    background-color: ${main1};
+};
     border-radius: 5px;
     margin-vertical: 5px;
     height: 60px;
@@ -197,7 +207,7 @@ export const CategoryButton = styled.TouchableOpacity`
     margin-top: 0;
 `
 export const CategoryText = styled.Text`
-    color: ${black};
+    color: ${main};
     font-size: 16px;
     font-weight: bold;
 `;
@@ -208,7 +218,7 @@ export const CreateLink = styled.TouchableOpacity`
     align-items: center;
     border-radius: 50px;
     background-color: ${primary};
-    border: 3px solid ${black};
+    border: 3px solid ${main2};
     margin-bottom: 10px;
     position: absolute;
     right: 30px;
@@ -230,6 +240,9 @@ export const LogoutButton = styled.TouchableOpacity`
     top: 86%;
 `;
 
+export const EditButton = styled(LogoutButton)`
+    color: ${main2};
+`
 export const DeleteView = styled.TouchableOpacity`
     padding-horizontal: 30px;
     background-color: ${grey};
@@ -241,31 +254,42 @@ export const DeleteView = styled.TouchableOpacity`
     margin-top: 0;
 `
 export const SlideView = styled.View`
-    height: ${windowHeight - 300}px;
+    height: ${windowHeight - 260}px;
     width: ${windowWidth - 18}px;
-    justify-content: center;
-    align-items: center;
+    ${'' /* align-items: center; */}
+    text-align: left;
 `
 
 export const QuestionView = styled.View`
-    background-color: ${secondary};
+    background-color: ${tertiary};
     padding: 15px;
     border-radius: 5px;
     height: 100px;
     width: ${windowWidth * 0.9}px;
     margin-vertical: 3px;
     margin-bottom: 10px;
+    align-self: center; 
 `;
 
 export const AnswerView = styled.View`
-    background-color: ${secondary};
+    background-color: ${tertiary};
     padding: 15px;
     border-radius: 5px;
     height: 460px;
     width: ${windowWidth * 0.9}px;
     margin-vertical: 3px;
+    margin-bottom: 10px;
+    align-self: center;
 `;
 
 export const StyledText = styled.Text`
     font-size: 16px;
+    color: ${main};
+    align-self: center;
 `
+export const StyledViewLabel = styled.Text`
+    color: ${main2};
+    font-size: 13px;
+    margin-left: 12px;
+    padding-bottom: 3px;
+`;

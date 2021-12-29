@@ -27,7 +27,7 @@ import { Octicons } from '@expo/vector-icons';
 import { useNavigationState } from '@react-navigation/native';
 
 // colors
-const { black } = Colors;
+const { black, main2 } = Colors;
 
 const Home = ({navigation }) => {   
     // context
@@ -104,7 +104,7 @@ const Home = ({navigation }) => {
                         <ButtonText create={true}>+</ButtonText>
                     </CreateLink>
                     <LogoutButton onPress={clearLogin}>
-                        <Octicons name="sign-out" size={50} color={black} />
+                        <Octicons name="sign-out" size={50} color={main2} />
                     </LogoutButton>
                 </HomeContainer>
             </InnerContainer>

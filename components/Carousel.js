@@ -1,8 +1,14 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Pressable, FlatList } from 'react-native';
-import { SlideView, AnswerView, QuestionView, StyledText } from './styles';
+import { 
+    SlideView, 
+    AnswerView, 
+    QuestionView, 
+    StyledText,
+    StyledViewLabel
+} from './styles';
 
-const Slide = ({ data }) => {
+const Slide = ({ data, index, cards }) => {
     // toggle answer
     const [answer, setAnswer] = useState(false);
 
@@ -12,20 +18,22 @@ const Slide = ({ data }) => {
 
     return (
         <SlideView>
+            <StyledViewLabel>Question</StyledViewLabel>
             <QuestionView>
                 <StyledText>{data.question}</StyledText>
             </QuestionView>
+            <StyledViewLabel>Answer</StyledViewLabel>
             <Pressable onPress={() => handleShowOrHideAnswer()}>
                 <AnswerView>
                     <StyledText>{answer ? data.answer : ''}</StyledText>
                 </AnswerView>
             </Pressable>
+            <StyledText>{index + 1}/{cards.length}</StyledText>
         </SlideView>
     )
 }
 
 const Carousel = ({ cards }) => {
-
     // configure active index
     const [index, setIndex] = useState(0);
     const indexRef = useRef(index);
@@ -57,16 +65,16 @@ const Carousel = ({ cards }) => {
     }
 
     // use the index
-    useEffect(() => {
-        console.warn(index);
-    }, [index]);
+    // useEffect(() => {
+    //     console.warn(index);
+    // }, [index]);
 
     return (
         <FlatList 
             data={cards}
             style={{ flex: 1 }}
-            renderItem={({ item }) => {
-                return <Slide data={item} />
+            renderItem={({ item, index }) => {
+                return <Slide data={item} index={index} cards={cards}/>
             }}
             keyExtractor={(item) => item._id}
             pagingEnabled={true}

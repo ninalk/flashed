@@ -14,7 +14,7 @@ import {
     ButtonText,
     Line,
     CreateLink,
-    StyledButton
+    EditButton
 } from './../components/styles';
 
 const CategoryDetails = ({ route, navigation }) => {   
@@ -45,8 +45,10 @@ const CategoryDetails = ({ route, navigation }) => {
             <StatusBar style="dark" />
             <InnerContainer>
                 <HomeContainer>
-                    <SubTitle>{category}</SubTitle>
                     <Carousel cards={cards} />
+                    {/* <EditButton>
+                        <ButtonText edit={true}>Edit</ButtonText>
+                    </EditButton> */}
                     <CreateLink onPress={() => navigation.navigate('CardForm', {
                         categoryId: categoryId
                     })}>
