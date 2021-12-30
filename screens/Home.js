@@ -19,11 +19,12 @@ import {
     ButtonText,
     CreateLink,
     LogoutButton,
-    Colors
+    Colors,
+    SettingsButton
 } from './../components/styles';
 
 // icons
-import { Octicons } from '@expo/vector-icons';
+import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
 import { useNavigationState } from '@react-navigation/native';
 
 // colors
@@ -100,11 +101,14 @@ const Home = ({navigation }) => {
                             renderItem={renderItem}
                         />
                     </StyledFormArea>
+                    <SettingsButton>
+                        <Fontisto name="player-settings" size={45} color={main2}/>
+                    </SettingsButton>
                     <CreateLink onPress={() => navigation.navigate('CategoryForm')}>
                         <ButtonText create={true}>+</ButtonText>
                     </CreateLink>
                     <LogoutButton onPress={clearLogin}>
-                        <Octicons name="sign-out" size={50} color={main2}/>
+                        <Fontisto name="unlocked" size={45} color={main2}/>
                     </LogoutButton>
                 </HomeContainer>
             </InnerContainer>

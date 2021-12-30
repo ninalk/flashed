@@ -151,7 +151,7 @@ const Login = ({navigation}) => {
                         {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => 
                         (<StyledFormArea>
                             <MyTextInput
-                                label="username"
+                                label="Username"
                                 icon="person"
                                 placeholder="ex. ninanina"
                                 placeholderTextColor={grey}

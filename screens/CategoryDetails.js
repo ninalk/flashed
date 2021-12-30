@@ -10,7 +10,15 @@ import {
     InnerContainer,
     ButtonText,
     CreateLink,
+    NewCardAlert,
+    NewCardAlertView,
+    Colors
 } from './../components/styles';
+
+// icons
+import { Octicons } from '@expo/vector-icons';
+
+const { main2 } = Colors;
 
 const CategoryDetails = ({ route, navigation }) => {   
     const [cards, setCards] = useState([]);
@@ -40,12 +48,30 @@ const CategoryDetails = ({ route, navigation }) => {
             <StatusBar style="dark" />
             <InnerContainer>
                 <HomeContainer>
-                    <Carousel cards={cards} navigation={navigation} />
-                    <CreateLink onPress={() => navigation.navigate('CardForm', {
-                        categoryId: categoryId
-                    })}>
-                        <ButtonText create={true}>+</ButtonText>
-                    </CreateLink>
+                    {cards.length ? 
+                        <>
+                        <Carousel cards={cards} navigation={navigation} />
+                        <CreateLink onPress={() => navigation.navigate('CardForm', {
+                            categoryId: categoryId
+                        })}>
+                            <ButtonText create={true}>+</ButtonText>
+                        </CreateLink>
+                        </>
+                        :
+                        <>
+                        <NewCardAlertView>
+                            <NewCardAlert>
+                                CREATE FLASHCARDS!
+                            </NewCardAlert>
+                            <Octicons name="arrow-down" size={50} color={main2} />
+                        </NewCardAlertView>
+                        <CreateLink onPress={() => navigation.navigate('CardForm', {
+                            categoryId: categoryId
+                        })}>
+                            <ButtonText create={true}>+</ButtonText>
+                        </CreateLink>
+                        </>
+                    }
                 </HomeContainer>
             </InnerContainer>
         </>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Constants from 'expo-constants';
-import { Dimensions } from 'react-native';
+import { Dimensions, Animated } from 'react-native';
 
 const StatusBarHeight = Constants.statusBarHeight;
 const windowWidth = Dimensions.get('window').width;
@@ -23,7 +23,7 @@ export const Colors = {
     white: "rgb(255, 255, 255)"
 }
 
-const { primary, secondary, tertiary, grey, white, green, blue, black, main, main1, main2 } = Colors;
+const { primary, secondary, tertiary, grey, white, green, blue, main, main1, main2 } = Colors;
 
 export const StyledContainer = styled.View`
     flex: 1;
@@ -70,6 +70,7 @@ export const StyledFormArea = styled.View`
 
 export const StyledTextInput = styled.TextInput`
     background-color: ${tertiary};
+    box-shadow: 0 1px 3px ${grey};
     padding: 15px;
     padding-left: 55px;
     padding-right: 55px;
@@ -93,7 +94,7 @@ export const StyledTextInput = styled.TextInput`
 `;
 
 export const StyledInputLabel = styled.Text`
-    color: ${grey};
+    color: ${main};
     font-size: 13px;
     text-align: left;
 `;
@@ -101,6 +102,7 @@ export const StyledInputLabel = styled.Text`
 export const StyledButton = styled.TouchableOpacity`
     padding: 15px;
     background-color: ${main2};
+    box-shadow: 0 1px 3px ${grey};
     justify-content: center;
     align-items: center;
     border-radius: 5px;
@@ -198,7 +200,7 @@ export const Avatar = styled.Image`
 export const CategoryButton = styled.TouchableOpacity`
     padding: 15px;
     background-color: ${main1};
-};
+    box-shadow: 1px 1px 3px ${main1};
     border-radius: 5px;
     margin-vertical: 5px;
     height: 60px;
@@ -222,7 +224,6 @@ export const CreateLink = styled.TouchableOpacity`
     border: 3px solid ${main2};
     margin-bottom: 10px;
     position: absolute;
-    right: 30px;
     top: 85%;
     box-shadow: 0 0 3px ${main2};
 `;
@@ -242,13 +243,24 @@ export const LogoutButton = styled.TouchableOpacity`
     top: 86%;
 `;
 
+export const SettingsButton = styled.TouchableOpacity`
+    width: 60px; 
+    height: 60px;
+    align-items: center;
+    background-color: ${primary};
+    position: absolute;
+    right: 28px;
+    top: 86%;
+`;
+
 export const EditLink = styled.TouchableOpacity`
     background-color: ${primary};
     margin-bottom: 10px;
 `
+
 export const EditText = styled.Text`
     color: ${main2};
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
 `
 export const DeleteView = styled.TouchableOpacity`
@@ -263,7 +275,7 @@ export const DeleteView = styled.TouchableOpacity`
 `
 export const SlideView = styled.View`
     height: ${windowHeight - 260}px;
-    width: ${windowWidth - 18}px;
+    width: ${windowWidth - 20}px;
     ${'' /* align-items: center; */}
     text-align: left;
 `
@@ -277,6 +289,7 @@ export const CardView = styled.View`
     margin-vertical: 3px;
     margin-bottom: 10px;
     align-self: center; 
+    box-shadow: 0 1px 3px ${grey};
 `;
 
 export const StyledText = styled.Text`
@@ -284,7 +297,7 @@ export const StyledText = styled.Text`
     color: ${main};
 `
 export const StyledViewLabel = styled.Text`
-    color: ${main2};
+    color: ${main};
     font-size: 13px;
     margin-left: 12px;
     padding-bottom: 3px;
@@ -292,7 +305,18 @@ export const StyledViewLabel = styled.Text`
 
 export const SlideFooter = styled.View`
     width: ${windowWidth * 0.9}px;
-    padding-left: 15px;
+    padding-left: 18px;
     flex-direction: row;
     justify-content: space-between;
+`
+
+export const NewCardAlert = styled.Text`
+    font-size: 26px;
+    color: ${main2};
+`
+export const NewCardAlertView = styled.View`
+    top: 70%;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 3px ${main2};
 `

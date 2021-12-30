@@ -39,7 +39,6 @@ const Slide = ({ data, index, cards, navigation }) => {
                     <EditText>Edit</EditText>
                 </EditLink>
                 <StyledText counter={true}>{index + 1}/{cards.length}</StyledText>
-                <StyledText>Shuffle</StyledText>
             </SlideFooter>
         </SlideView>
     )

@@ -4,13 +4,13 @@ import { Text, View, StyleSheet } from 'react-native';
 const FlashedLogo = () => {
     return (
         <View style={styles.container}>
-            <Text style={[styles.setFontSize, styles.setColorPink]}>F</Text>
-            <Text style={[styles.setFontSize, styles.setColorGreen]}>L</Text>
-            <Text style={[styles.setFontSize, styles.setColorYellow]}>A</Text>
-            <Text style={[styles.setFontSize, styles.setColorBlue]}>S</Text>
-            <Text style={[styles.setFontSize, styles.setColorOrange]}>H</Text>
-            <Text style={[styles.setFontSize, styles.setColorPink]}>E</Text>
-            <Text style={[styles.setFontSize, styles.setColorGreen]}>D</Text>
+            <Text style={[styles.setFontSize, styles.setColorPink, styles.shadowProp]}>F</Text>
+            <Text style={[styles.setFontSize, styles.setColorGreen, styles.shadowProp]}>L</Text>
+            <Text style={[styles.setFontSize, styles.setColorYellow, styles.shadowProp]}>A</Text>
+            <Text style={[styles.setFontSize, styles.setColorBlue, styles.shadowProp]}>S</Text>
+            <Text style={[styles.setFontSize, styles.setColorOrange, styles.shadowProp]}>H</Text>
+            <Text style={[styles.setFontSize, styles.setColorPink, styles.shadowProp]}>E</Text>
+            <Text style={[styles.setFontSize, styles.setColorGreen, styles.shadowProp]}>D</Text>
         </View>
     )
 }
@@ -26,8 +26,14 @@ const styles = StyleSheet.create({
         fontSize: 45,
         fontWeight: 'bold'
     },
+    shadowProp: {
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+    },
     setColorPink: {
-        color: 'rgb(232, 146, 144)'
+        color: 'rgb(232, 146, 144)',
     },
     setColorGreen: {
         color: 'rgb(94, 145, 75)'

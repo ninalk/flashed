@@ -34,9 +34,9 @@ const Carousel = ({ cards, navigation }) => {
     }
 
     // use the index
-    useEffect(() => {
-        console.warn(index);
-    }, [index]);
+    // useEffect(() => {
+    //     console.warn(index);
+    // }, [index]);
 
     return (
         <FlatList 
